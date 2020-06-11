@@ -79,10 +79,85 @@ const merge = (nums1, m, nums2, n) => {
 
 const merge_JS = function (nums1, m, nums2, n) {
 	nums1.splice(m)
-  nums2.splice(n)
+	nums2.splice(n)
 	return [...nums1, ...nums2].sort((a, b) => a - b)
 }
 
-console.log(merge_JS(nums1, m, nums2, n))
+// console.log(merge_JS(nums1, m, nums2, n))
 
+//三数求和
+/**
+ * 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。
+注意：答案中不可以包含重复的三元组
+ */
 
+//双指针法用在涉及求和、比大小类的数组题目里时，大前提往往是：该数组必须有序。否则双指针根本无法帮助我们缩小定位的范围，压根没有意义。因此这道题的第一步是将数组排序：
+
+const nums3 = [-1, 0, 1, 2, -1, -4]
+
+nums4 = nums3.sort((a, b) => {
+	return a - b
+})
+const threeSum = function (nums) {
+	// 用于存放结果数组
+	let res = []
+	// 目标值为0
+	let sum = 0
+	// 给 nums 排序
+	nums = nums.sort((a, b) => {
+		return a - b
+	})
+	// 缓存数组长度
+	const len = nums.length
+	// 注意我们遍历到倒数第三个数就足够了，因为左右指针会遍历后面两个数
+	for (let i = 0; i < len - 2; i++) {
+		// 左指针 j
+		let j = i + 1
+		// 右指针k
+		let k = len - 1
+		// 如果遇到重复的数字，则跳过
+		if (i > 0 && nums[i] === nums[i - 1]) {
+			continue
+		}
+		while (j < k) {
+			// 三数之和小于0，左指针前进
+			if (nums[i] + nums[j] + nums[k] < 0) {
+				j++
+				// 处理左指针元素重复的情况
+				while (j < k && nums[j] === nums[j - 1]) {
+					j++
+				}
+			} else if (nums[i] + nums[j] + nums[k] > 0) {
+				// 三数之和大于0，右指针后退
+				k--
+
+				// 处理右指针元素重复的情况
+				while (j < k && nums[k] === nums[k + 1]) {
+					k--
+				}
+			} else {
+				// 得到目标数字组合，推入结果数组
+				res.push([nums[i], nums[j], nums[k]])
+
+				// 左右指针一起前进
+				j++
+				k--
+
+				// 若左指针元素重复，跳过
+				while (j < k && nums[j] === nums[j - 1]) {
+					j++
+				}
+
+				// 若右指针元素重复，跳过
+				while (j < k && nums[k] === nums[k + 1]) {
+					k--
+				}
+			}
+		}
+	}
+
+	// 返回结果数组
+	return res
+}
+
+console.log(threeSum(nums4))
