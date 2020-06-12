@@ -95,9 +95,6 @@ const merge_JS = function (nums1, m, nums2, n) {
 
 const nums3 = [-1, 0, 1, 2, -1, -4]
 
-nums4 = nums3.sort((a, b) => {
-	return a - b
-})
 const threeSum = function (nums) {
 	// 用于存放结果数组
 	let res = []
@@ -121,13 +118,13 @@ const threeSum = function (nums) {
 		}
 		while (j < k) {
 			// 三数之和小于0，左指针前进
-			if (nums[i] + nums[j] + nums[k] < 0) {
+			if (nums[i] + nums[j] + nums[k] < sum) {
 				j++
 				// 处理左指针元素重复的情况
 				while (j < k && nums[j] === nums[j - 1]) {
 					j++
 				}
-			} else if (nums[i] + nums[j] + nums[k] > 0) {
+			} else if (nums[i] + nums[j] + nums[k] > sum) {
 				// 三数之和大于0，右指针后退
 				k--
 
@@ -160,4 +157,18 @@ const threeSum = function (nums) {
 	return res
 }
 
-console.log(threeSum(nums4))
+console.log(threeSum(nums3))
+
+/** 
+ * 双指针法中的“对撞指针”法
+在上面这道题中，左右指针一起从两边往中间位置相互迫近，这样的特殊双指针形态，被称为“对撞指针”。
+
+什么时候你需要联想到对撞指针？
+这里我给大家两个关键字——“有序”和“数组”。
+没错，见到这两个关键字，立刻把双指针法调度进你的大脑内存。普通双指针走不通，立刻想对撞指针！
+
+即便数组题目中并没有直接给出“有序”这个关键条件，我们在发觉普通思路走不下去的时候，也应该及时地尝试手动对其进行排序试试看有没有新的切入点——没有条件，创造条件也要上。
+
+对撞指针可以帮助我们缩小问题的范围，这一点在“三数求和”问题中体现得淋漓尽致：因为数组有序，所以我们可以用两个指针“画地为牢”圈出一个范围，这个范围以外的值不是太大就是太小、
+直接被排除在我们的判断逻辑之外，这样我们就可以把时间花在真正有意义的计算和对比上。如此一来，不仅节省了计算的时间，更降低了问题本身的复杂度，我们做题的速度也会大大加快。
+*/
