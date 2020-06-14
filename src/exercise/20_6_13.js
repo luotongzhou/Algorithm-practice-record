@@ -1,6 +1,5 @@
 //链表的合并
 //将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有结点组成的。
-const
 
 const mergeTwoLists = function (l1, l2) {
 	// 定义头结点，确保链表可以被访问到
@@ -31,3 +30,43 @@ const mergeTwoLists = function (l1, l2) {
 	// 返回起始结点
 	return head.next
 }
+
+//给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
+
+const a = {
+	val: 1,
+	next: {
+		val: 1,
+		next: {
+			val: 2,
+			next: {
+				val: 2,
+				next: {
+					val: 3,
+					next: null
+				}
+			}
+		}
+	}
+}
+
+const deleteDuplicates = function (head) {
+	// 设定 cur 指针，初始位置为链表第一个结点
+	let cur = head
+	// 遍历链表
+	while (cur != null && cur.next != null) {
+		// 若当前结点和它后面一个结点值相等（重复）
+		if (cur.val === cur.next.val) {
+			// 删除靠后的那个结点（去重）
+			cur.next = cur.next.next
+		} else {
+			// 若不重复，继续遍历
+			cur = cur.next
+		}
+		console.log('cur', cur)
+		console.log('head', head)
+	}
+	return head
+}
+
+console.log(deleteDuplicates(a))
