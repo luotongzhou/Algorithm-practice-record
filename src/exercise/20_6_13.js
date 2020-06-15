@@ -67,8 +67,6 @@ const deleteDuplicates = function (head) {
 			// 若不重复，继续遍历
 			cur = cur.next
 		}
-		console.log('cur', cur)
-		console.log('head', head)
 	}
 	return head
 }
