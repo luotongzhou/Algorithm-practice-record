@@ -37,7 +37,7 @@ const isValid = function (s) {
 
 //栈问题进阶-每日温度问题
 //根据每日气温列表，请重新生成一个列表，对应位置的输出是需要再等待多久温度才会升高超过该日的天数。如果之后都不会升高，请在该位置用 0 来代替。
-
+const T = [73, 74, 75, 71, 69, 72, 76, 73]
 // 入参是温度数组
 const dailyTemperatures = function (T) {
 	const len = T.length // 缓存数组的长度
@@ -57,3 +57,4 @@ const dailyTemperatures = function (T) {
 	// 返回结果数组
 	return res
 }
+console.log(dailyTemperatures(T))
